@@ -21,6 +21,6 @@
   "lang": "pt-BR",
   "name": "Organo-Projeto",
   "short_name": "OrganoProjeto",
-  "start_url": "/Ornograma-profissional",
-  "scope": "/Ornograma-profissional"
+  "start_url": "/Ornograma-profissional/",
+  "scope": "/Ornograma-profissional/"
 }
