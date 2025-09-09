@@ -9,57 +9,38 @@ const Time = () => {
   const timesRepo = new TimesRepo();
   const [times, setTimes] = useState(timesRepo.listar());
 
-  // Cadastrar novo time
-  const cadastrarTime = (novoTime) =>
-    setTimes([...times, { ...novoTime, id: uuidv4(), colaboradores: [] }]);
+  function cadastrarTime(novoTime) {
+    setTimes([...times, { ...novoTime, id: uuidv4() }]);
+  }
 
-  // Mudar a cor do time
-  const mudarCorDoTime = (cor, idTime) =>
-    setTimes(times.map((t) => (t.id === idTime ? { ...t, cor } : t)));
+  function mudarCorDoTime(cor, time) {
+    time.cor = cor;
+  }
 
-  // Deletar colaborador de um time
-  const deletarColaboradorDoTime = (idColaborador, idTime) => {
-    setTimes(
-      times.map((t) =>
-        t.id === idTime
-          ? {
-              ...t,
-              colaboradores: t.colaboradores.filter(
-                (c) => c.id !== idColaborador
-              ),
-            }
-          : t
-      )
-    );
-  };
-
-  return times.map((time) => (
-    <section
-      key={time.id}
-      className="time"
-      style={{
-        backgroundImage: "url(/imagens/fundo.png)",
-        backgroundColor: hexToRgba(time.cor, "0.6"),
-      }}
-    >
-      <input
-        type="color"
-        className="input-color"
-        value={time.cor}
-        onChange={(e) => mudarCorDoTime(e.target.value, time.id)}
-      />
-
-      <h3 style={{ borderColor: time.cor }}>{time.nome}</h3>
-
-      <div className="colaboradores">
-        <Colaborador
-          colaboradores={time.colaboradores}
-          corDeFundo={time.cor}
-          deletarColaborador={(id) => deletarColaboradorDoTime(id, time.id)}
+  return times?.map((time) => {
+    return (
+      <section
+        key={uuidv4()}
+        className="time"
+        style={{
+          backgroundImage: "url(/imagens/fundo.png)",
+          backgroundColor: hexToRgba(time.cor, "0.6"),
+        }}
+      >
+        <input
+          onChange={(evento) => mudarCorDoTime(evento.target.value, time)}
+          value={time.cor}
+          type="color"
+          className="input-color"
         />
-      </div>
-    </section>
-  ));
+
+        <h3 style={{ borderColor: time.cor }}>{time.nome}</h3>
+        <div className="colaboradores">
+          <Colaborador time={time} corDeFundo={time.cor} />
+        </div>
+      </section>
+    );
+  });
 };
 
 export default Time;
