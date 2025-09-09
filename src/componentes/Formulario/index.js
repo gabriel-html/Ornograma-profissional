@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Botao from "../Botao";
 import Campo from "../Campo";
-import ListaSuspensa from "../ListaSuspensa";
 import "./formulario.css";
 
 const Formulario = ({ cadastrarTime, aoCadastrar, times }) => {
@@ -45,13 +44,6 @@ const Formulario = ({ cadastrarTime, aoCadastrar, times }) => {
           label="Imagem"
           placeholder="Informe o endereço da imagem "
           aoAlterado={(valor) => setImagem(valor)}
-        />
-        <ListaSuspensa
-          obrigatorio={true}
-          label="Times"
-          items={times}
-          valor={time}
-          aoAlterado={(valor) => setTime(valor)}
         />
         <Botao texto="Criar card" />
       </form>

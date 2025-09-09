@@ -1,11 +1,26 @@
+import { useState } from "react";
 import Colaborador from "../Colaborador";
 import "./time.css";
 import hexToRgba from "hex-to-rgba";
+import { v4 as uuidv4 } from "uuid";
+import { TimesRepo } from "../../repositorios/timesRepo";
 
-const Time = ({ time, colaboradores, aoDeletar, mudarCor }) => {
-  return (
-    colaboradores.length > 0 && (
+const Time = () => {
+  const timesRepo = new TimesRepo();
+  const [times, setTimes] = useState(timesRepo.listar());
+
+  function cadastrarTime(novoTime) {
+    setTimes([...times, { ...novoTime, id: uuidv4() }]);
+  }
+
+  function mudarCorDoTime(cor, time) {
+    time.cor = cor;
+  }
+
+  return times?.map((time) => {
+    return (
       <section
+        key={uuidv4()}
         className="time"
         style={{
           backgroundImage: "url(/imagens/fundo.png)",
@@ -13,7 +28,7 @@ const Time = ({ time, colaboradores, aoDeletar, mudarCor }) => {
         }}
       >
         <input
-          onChange={(evento) => mudarCor(evento.target.value, time.id)}
+          onChange={(evento) => mudarCorDoTime(evento.target.value, time)}
           value={time.cor}
           type="color"
           className="input-color"
@@ -21,20 +36,11 @@ const Time = ({ time, colaboradores, aoDeletar, mudarCor }) => {
 
         <h3 style={{ borderColor: time.cor }}>{time.nome}</h3>
         <div className="colaboradores">
-          {colaboradores.map((colaborador, indice) => {
-            return (
-              <Colaborador
-                key={indice}
-                colaborador={colaborador}
-                corDeFundo={time.cor}
-                aoDeletar={aoDeletar}
-              />
-            );
-          })}
+          <Colaborador time={time} corDeFundo={time.cor} />
         </div>
       </section>
-    )
-  );
+    );
+  });
 };
 
 export default Time;
