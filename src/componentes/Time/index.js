@@ -14,7 +14,15 @@ const Time = () => {
   }
 
   function mudarCorDoTime(cor, time) {
-    time.cor = cor;
+    const timeId = time.id;
+    setTimes(
+      times.map((time) => {
+        if (time.id === timeId) {
+          time.cor = cor;
+        }
+        return time;
+      })
+    );
   }
 
   return times?.map((time) => {
