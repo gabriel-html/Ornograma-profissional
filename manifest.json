@@ -1,0 +1,26 @@
+{
+  "theme_color": "#6f6b76",
+  "background_color": "#2b6378",
+  "icons": [
+    {
+      "purpose": "maskable",
+      "sizes": "512x512",
+      "src": "icon512_maskable.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any",
+      "sizes": "512x512",
+      "src": "icon512_rounded.png",
+      "type": "image/png"
+    }
+  ],
+  "orientation": "any",
+  "display": "standalone",
+  "dir": "auto",
+  "lang": "pt-BR",
+  "name": "Organo-Projeto",
+  "short_name": "OrganoProjeto",
+  "start_url": "/Ornograma-profissional/",
+  "scope": "/Ornograma-profissional/"
+}
