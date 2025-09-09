@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 import { ColaboradoresRepo } from "../../repositorios/colaboradoresRepo";
-import { v4 as uuidv4 } from "uuid";
 
 import "./colaborador.css";
 
@@ -17,9 +16,13 @@ const Colaborador = ({ time, corDeFundo }) => {
     );
   }
 
-  return colaboradores.map((colaborador, indice) => (
-    <div key={uuidv4()} className="colaborador">
-      <IoIosCloseCircle size={25} className="deletar" onClick={() => {}} />
+  return colaboradores.map((colaborador) => (
+    <div key={colaborador.id} className="colaborador">
+      <IoIosCloseCircle
+        size={25}
+        className="deletar"
+        onClick={() => deletarColaboradores(colaborador.id)}
+      />
 
       <div className="cabecalho" style={{ backgroundColor: corDeFundo }}>
         <img src={colaborador.imagem} alt={colaborador.nome} />
